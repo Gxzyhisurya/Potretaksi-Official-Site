@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - POTRETAKSI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-black: #000000;
+            --text-white: #ffffff;
+            --text-gray: #a3a3a3;
+            --accent-red: #e50914;
+            --nav-dark: #121212;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            padding-bottom: 70px; /* Ruang untuk bottom nav */
+        }
+
+        /* --- Header --- */
+        header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            color: var(--accent-red);
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 18px;
+        }
+
+        /* --- Content Section --- */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .movie-card {
+            margin-bottom: 30px;
+        }
+
+        .thumbnail-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .thumbnail-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .movie-info {
+            padding: 15px;
+        }
+
+        .movie-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .title-area h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .release-date {
+            color: var(--accent-red);
+            font-size: 14px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 25px;
+        }
+
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 11px;
+            gap: 5px;
+        }
+
+        .action-btn i {
+            font-size: 20px;
+        }
+
+        .description {
+            font-size: 14px;
+            color: var(--text-gray);
+            line-height: 1.4;
+            margin: 10px 0;
+        }
+
+        .tags {
+            font-size: 12px;
+            font-weight: bold;
+            color: #ddd;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- Bottom Nav (Your Provided CSS) --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: var(--nav-dark);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-top: 1px solid #222;
+            z-index: 2000;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #757575;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 10px;
+            gap: 4px;
+        }
+
+        .nav-link.active { color: white; }
+        .nav-link i { font-size: 20px; }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            outline: none;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">POTRETAKSI</div>
+        <div class="header-icons">
+            <i class="fas fa-search"></i>
+            <div style="width: 24px; height: 24px; background: #555; border-radius: 4px;"></div>
+        </div>
+    </header>
+
+    <div class="section-title">
+        <i class="fas fa-bell" style="color: var(--accent-red);"></i> Coming Soon
+    </div>
+
+    <div class="movie-card">
+        <div class="thumbnail-container">
+            <img src="virusxthumbnail.jpg" alt="The Last Frontier">
+        </div>
+        
+        <div class="movie-info">
+            <div class="movie-header">
+                <div class="title-area">
+                    <h2>Virus X</h2>
+                    <span class="release-date">Coming April 15</span>
+                </div>
+                <div class="action-buttons">
+                    <a href="https://www.instagram.com/potretaksi.id?igsh=NXNrNG42MHphcnJm" class="action-btn">
+                        <i class="far fa-bell"></i>
+                        <span>Remind Me</span>
+                    </a>
+                    <a href="https://www.instagram.com/potretaksi.id?igsh=NXNrNG42MHphcnJm" class="action-btn">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Info</span>
+                    </a>
+                </div>
+            </div>
+
+            <p class="description">
+                Devan awalnya hanya ingin menyembuhkan sahabatnya, Kevin, dengan ramuan dari tanaman liar di belakang asrama, tetapi tanpa disadari justru menciptakan virus mematikan yang menyebar dan menghancurkan kota. Bersama Reno, ia berjuang menemukan penawar bernama Serum AX-13 di tengah kekacauan dan kepanikan, sambil berusaha menyelamatkan diri serta orang-orang yang tersisa sebelum semuanya terlambat.
+            </p>
+            <div class="tags">THILLER • DRAMA</div>
+        </div>
+    </div>
+    
+        <div class="movie-card">
+        <div class="thumbnail-container">
+            <img src="easfthumbnail.jpg" alt="The Last Frontier">
+        </div>
+        
+        <div class="movie-info">
+            <div class="movie-header">
+                <div class="title-area">
+                    <h2>Entity Activity: kill..</h2>
+                    <span class="release-date">Coming On Potretaksi</span>
+                </div>
+                <div class="action-buttons">
+                    <a href="https://www.instagram.com/potretaksi.id?igsh=NXNrNG42MHphcnJm" class="action-btn">
+                        <i class="far fa-bell"></i>
+                        <span>Remind Me</span>
+                    </a>
+                    <a href="https://www.instagram.com/potretaksi.id?igsh=NXNrNG42MHphcnJm" class="action-btn">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Info</span>
+                    </a>
+                </div>
+            </div>
+
+            <p class="description">
+                Seorang konten kreator horor mengajak empat kreator terkenal lainnya untuk melakukan uji nyali di sebuah pabrik gula bekas yang dahulu merupakan rumah sakit jiwa angker bernama Gonjiam, namun suasana berubah mencekam saat satu per satu dari mereka mengalami kerasukan hingga merenggut nyawa, membuat yang tersisa harus berjuang keluar dengan selamat dari tempat penuh teror tersebut.
+            </p>
+            <div class="tags">HOROR • DOKUMENTER</div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="upcoming.html" class="nav-link active">
+            <i class="fas fa-layer-group"></i>
+            <span>Coming Soon</span>
+        </a>
+        <a href="Searchpage.html" class="nav-link">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+        </a>
+    </nav>
+
+</body>
+</html>

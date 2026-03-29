@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PotretAksi - Home</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           BAGIAN PENGATURAN (Ubah angka di sini)
+           ========================================= */
+        :root {
+            --tinggi-header-hero: 65vh;      /* Tinggi poster utama */
+            --lebar-poster-trending: 130px;  /* Lebar poster bawah */
+            --jarak-konten-bawah: 10px;      /* Jarak tombol play dari bawah */
+            
+            /* Warna */
+            --primary-red: #E50914;
+            --bg-black: #000000;
+            --nav-dark: #121212;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-black);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* --- Header: Berubah Hitam Saat Scroll --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            box-sizing: border-box;
+            transition: background-color 0.4s ease;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+        }
+
+        header.scrolled {
+            background-color: var(--bg-black) !important;
+            border-bottom: 1px solid #222;
+        }
+
+        .logo {
+            color: var(--primary-red);
+            font-weight: 900;
+            font-size: 22px;
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile-box {
+            width: 30px;
+            height: 30px;
+            background-color: #0073ff;
+            border-radius: 3px;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            height: var(--tinggi-header-hero);
+            background: linear-gradient(to top, var(--bg-black) 5%, rgba(0,0,0,0.1) 50%, transparent 100%), 
+                        url('searchinghdr.jpg'); /* Ganti gambar utama di sini */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: var(--jarak-konten-bawah);
+        }
+
+        .hero-content {
+            text-align: center;
+            width: 90%;
+        }
+
+        .n-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .n-badge span { color: var(--primary-red); font-size: 30px; }
+
+        .hero-info {
+            margin-bottom: 25px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #e6e6e6;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .btn-sub {
+            text-decoration: none;
+            color: white;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-sub i { font-size: 20px; }
+
+        .btn-play {
+            background-color: white;
+            color: black;
+            padding: 10px 30px;
+            border-radius: 4px;
+            font-weight: 800;
+            font-size: 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- Movie Row --- */
+        .content-area {
+            padding: 20px 4%;
+            position: relative;
+            z-index: 10;
+            padding-bottom: 150px; 
+        }
+
+        .row-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .movie-row {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            /* TAMBAHKAN INI: Memberi jarak ke kategori di bawahnya */
+            margin-bottom: 25px; 
+        }
+
+
+        .movie-row::-webkit-scrollbar { display: none; }
+
+        .poster {
+            flex: 0 0 var(--lebar-poster-trending);
+            aspect-ratio: 3/4;
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #333;
+            text-decoration: none;
+        }
+
+        .poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- Bottom Nav --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: var(--nav-dark);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-top: 1px solid #222;
+            z-index: 2000;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #757575;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 10px;
+            gap: 4px;
+        }
+
+        .nav-link.active { color: white; }
+        .nav-link i { font-size: 20px; }
+
+* {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    outline: none;
+}
+
+    </style>
+</head>
+<body>
+
+    <header id="mainHeader">
+        <a href="home.html" class="logo">POTRETAKSI</a>
+        <div class="header-right">
+            <a href="Searchpage.html" style="color:white; text-decoration:none;"><i class="fas fa-search"></i></a>
+            <div class="profile-box"></div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-info">Horor • Thriller • Dokumenter</div>
+            
+            <div class="hero-btns">
+                <a href="searchingepisode1.html" class="btn-sub">
+                    <i class="fas fa-plus"></i>
+                    <span>My List</span>
+                </a>
+                
+                <a href="searchingepisode1.html" class="btn-play">
+                    <i class="fas fa-play"></i> Play
+                </a>
+
+                <a href="searchingepisode1.html" class="btn-sub">
+                    <i class="far fa-question-circle"></i>
+                    <span>Info</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main class="content-area">
+        <div class="row-title">Baru Ditambahkan <i class="fas fa-chevron-right" style="font-size: 12px; margin-left: 5px; color: #555;"></i></div>
+        <div class="movie-row">
+            <a href="pertanyaan.html" class="poster"><img src="pertanyaaku.jpg" alt="Film 1"></a>
+            <a href="searchingepisode1.html" class="poster"><img src="Searchingku.jpg" alt="Film 2"></a>
+            <a href="gagabahfilm.html" class="poster"><img src="gagabahku.jpg" alt="Film 3"></a>
+            <a href="merasukfilm.html" class="poster"><img src="merasukku.jpg" alt="Film 4"></a>
+        </div>
+           <div class="row-title">Rekomendasi <i class="fas fa-chevron-right" style="font-size: 12px; margin-left: 5px; color: #555;"></i></div>
+        <div class="movie-row">
+            <a href="siccinfilm.html" class="poster"><img src="siccinposter.jpg" alt="Film 1"></a>
+            <a href="tertipumuslihatfilm.html" class="poster"><img src="tertipuku.jpg" alt="Film 2"></a>
+            <a href="schoolnightmarefilm.html" class="poster"><img src="schoolnightmareps.jpg" alt="Film 3"></a>
+            <a href="ningrumfilm.html" class="poster"><img src="ningcomku.jpg" alt="Film 4"></a>
+            <a href="leuweungfilm.html" class="poster"><img src="penungguku.jpg" alt="Film 4"></a>
+            <a href="diaterpanggilfull.html" class="poster"><img src="diaku.jpg" alt="Film 4"></a>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-link active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="Searchpage.html" class="nav-link">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+        </a>
+    </nav>
+
+    <script>
+        window.onscroll = function() {
+            var header = document.getElementById('mainHeader');
+            if (window.pageYOffset > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        };
+    </script>
+
+</body>
+</html>
