@@ -3,222 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Potretaksi - Echoes of Silence</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>POTRETAKSI ENTERTAIMENT</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'tixpen-dark': '#000000',
+                        'tixpen-card': '#1a1a1a',
+                        'tixpen-step': '#262626',
+                        'tixpen-red': '#f1313e',
+                    },
+                }
+            }
+        }
+    </script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* RESET & BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #000; color: #fff; overflow-x: hidden; min-height: 100vh; }
+        
+        /* PAGE CONTROL */
+        .page-section { display: none; width: 100%; min-height: 100vh; }
+        .page-section.active { display: block; }
 
-        body {
-            background-color: #000;
-            color: #ffffff;
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.5;
-        }
+        /* FADE ANIMATION */
+        .fade-in { opacity: 0; transform: translateY(15px); animation: fadeInUp 0.7s ease-out forwards; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+        .delay-3 { animation-delay: 0.4s; }
 
-        /* Container Video */
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* Aspect Ratio 16:9 */
-            background-color: #111;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Tombol Back */
-        .back-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 10;
-            background: rgba(0,0,0,0.5);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
+        /* --- STYLES HALAMAN 2 (BOOKING) UNTUK MENGHINDARI BENTROK --- */
+        .booking-wrapper {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
-            align-items: center;
             justify-content: center;
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-        }
-
-        /* Konten Detail */
-        .content-details {
+            align-items: center;
+            height: 100vh;
             padding: 20px;
         }
-
-        h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 10px;
+        .container-booking {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            width: 100%;
+            max-width: 350px;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #333;
         }
+        .back-btn-booking { color: #888; text-decoration: none; font-size: 14px; font-weight: bold; display: flex; align-items: center; gap: 10px; margin-bottom: 30px; cursor: pointer; }
+        .booking-title { font-size: 28px; font-weight: bold; margin-bottom: 10px; color: white; }
+        .booking-subtitle { color: #888; font-size: 14px; line-height: 1.5; margin-bottom: 40px; }
+        .booking-label { color: #ff3d3d; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 10px; }
+        .input-booking-group { position: relative; margin-bottom: 25px; }
+        .input-booking-group input { width: 100%; background: #222; border: 1px solid #333; border-radius: 12px; padding: 15px; color: #fff; font-size: 16px; outline: none; transition: 0.3s; }
+        .input-booking-group input:focus { border-color: #ff0000; background: #2a2a2a; }
+        .ticket-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #555; }
+        .btn-verify { width: 100%; background: #ff0000; color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.3s; margin-bottom: 30px; }
+        #error-msg { color: #ff3d3d; font-size: 13px; margin-top: -15px; margin-bottom: 15px; display: none; }
+        .info-box-booking { background: #1a1a1a; padding: 15px; border-radius: 15px; display: flex; gap: 12px; border-left: 3px solid #ff0000; }
+        .info-box-booking i { color: #ff0000; margin-top: 3px; }
+        .info-box-booking p { color: #888; font-size: 12px; margin: 0; line-height: 1.4; text-align: left; }
 
-        .meta-data {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-
-        .match-score {
-            color: #46d369;
-            font-weight: bold;
-        }
-
-        .rating-box {
-            border: 1px solid #888;
-            padding: 2px 6px;
-            border-radius: 3px;
-            color: #ccc;
-        }
-
-        .duration {
-            color: #aaa;
-        }
-
-        /* Baris Tombol Aksi */
-        .action-bar {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 30px;
-        }
-
-        .action-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: #fff;
-            transition: opacity 0.2s;
-        }
-
-        .action-item:active {
-            opacity: 0.6;
-        }
-
-        .action-item i {
-            font-size: 24px;
-        }
-
-        .action-item span {
-            font-size: 12px;
-            color: #aaa;
-        }
-
-        /* Garis Pemisah */
-        hr {
-            border: 0;
-            border-top: 1px solid #333;
-            margin-bottom: 25px;
-        }
-
-        /* Sinopsis & Genre */
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .synopsis-text {
-            color: #ccc;
-            font-size: 14px;
-            margin-bottom: 30px;
-        }
-
-        .genre-tags {
-            display: flex;
-            gap: 10px;
-        }
-
-        .tag {
-            background-color: #333;
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 14px;
-            color: #eee;
-        }
-                        * {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-    outline: none;
-}
-
-body {
-    background-color: #000;
-    color: #ffffff;
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.5;
-    /* Tambahkan ini */
-    padding-bottom: 50px; 
-}
+        /* --- STYLES HALAMAN 3 (VIDEO) --- */
+        .video-wrapper { font-family: 'Roboto', sans-serif; padding-bottom: 50px; }
+        .video-container { position: relative; width: 100%; padding-top: 56.25%; background-color: #111; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .back-button-video { position: absolute; top: 20px; left: 20px; z-index: 10; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: white; }
     </style>
 </head>
 <body>
 
-    <div class="video-container">
-<a href="index.html" class="back-button">
-    <i class="fas fa-arrow-left"></i>
-</a>
-        
-        <iframe 
-            src="https://youtube.com/embed/M_Cj5IcaMvA?si=3LP4_STTxSrv9fGL" 
-            allowfullscreen>
-        </iframe>
-    </div>
+    <section id="page1" class="page-section active">
+        <div class="flex flex-col items-center p-4 pt-10 font-['Inter']">
+            <div class="w-full max-w-[420px] fade-in">
+                <div class="text-center mb-8 px-6">
+                    <h1 class="text-[28px] font-bold mb-2 tracking-tight">Konfirmasi<br>Pembayaran</h1>
+                    <p class="text-zinc-400 text-sm">Selesaikan pesanan Anda dengan memindai<br>kode QRIS</p>
+                </div>
 
-    <div class="content-details">
-        <h1>Tertipu Muslihat</h1>
+                <div class="w-72 mx-auto mb-8 fade-in delay-1">
+                    <div class="bg-white p-6 rounded-[32px] shadow-lg flex flex-col items-center">
+                        <img src="potretqris.jpg" alt="QRIS Code" class="w-44 h-44 aspect-square object-contain">
+                        <div class="flex items-center gap-3 mt-5 w-full justify-center">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo_QRIS.svg/1200px-Logo_QRIS.svg.png" alt="QRIS" class="h-6">
+                            <span class="text-zinc-400 text-[10px] font-semibold border-l pl-3 border-zinc-200">GPN ACCEPTED</span>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="meta-data">
-            <span class="match-score">68% Match</span>
-            <span class="year">2024</span>
-            <span class="rating-box">17+</span>
-            <span class="duration">6 Minutes</span>
+                <div class="space-y-3 mb-10 px-2 fade-in delay-2">
+                    <div class="bg-tixpen-card p-4 rounded-2xl flex items-center gap-4">
+                        <span class="text-tixpen-red font-bold text-sm">01</span>
+                        <div class="w-9 h-9 flex items-center justify-center bg-tixpen-step rounded-xl text-tixpen-red"><i class="fas fa-mobile-alt text-lg"></i></div>
+                        <p class="text-sm font-medium">Selesaikan Pembayaran dengan Metode QRIS</p>
+                    </div>
+                    <div class="bg-tixpen-card p-4 rounded-2xl flex items-center gap-4">
+                        <span class="text-tixpen-red font-bold text-sm">02</span>
+                        <div class="w-9 h-9 flex items-center justify-center bg-tixpen-step rounded-xl text-tixpen-red"><i class="far fa-image text-lg"></i></div>
+                        <p class="text-sm font-medium">Screenshot Hasil Transaksi jika sudah membayar</p>
+                    </div>
+                    <div class="bg-tixpen-card p-4 rounded-2xl flex items-center gap-4">
+                        <span class="text-tixpen-red font-bold text-sm">03</span>
+                        <div class="w-9 h-9 flex items-center justify-center bg-tixpen-step rounded-xl text-tixpen-red"><i class="far fa-envelope text-lg"></i></div>
+                        <p class="text-sm font-medium">Klik tombol 'Email' & kirim bukti ke Admin</p>
+                    </div>
+                    <div class="bg-tixpen-card p-4 rounded-2xl flex items-center gap-4">
+                        <span class="text-tixpen-red font-bold text-sm">04</span>
+                        <div class="w-9 h-9 flex items-center justify-center bg-tixpen-step rounded-xl text-tixpen-red"><i class="far fa-clock text-lg"></i></div>
+                        <p class="text-sm font-medium">Tunggu Maks 24 Jam untuk Kode Booking</p>
+                    </div>
+                    <div class="bg-tixpen-card p-4 rounded-2xl flex items-center gap-4">
+                        <span class="text-tixpen-red font-bold text-sm">05</span>
+                        <div class="w-9 h-9 flex items-center justify-center bg-tixpen-step rounded-xl text-tixpen-red"><i class="fas fa-search text-lg"></i></div>
+                        <p class="text-sm font-medium">Cek Transaksi & masukkan Kode Booking Anda</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4 px-2 fade-in delay-3">
+                    <button onclick="window.location.href='mailto:admin@tixpen.com'" class="w-full bg-tixpen-red text-white py-[18px] rounded-2xl font-bold flex items-center justify-center gap-2.5 hover:bg-red-700 transition-all active:scale-[0.98]">
+                        <i class="far fa-envelope text-xl"></i>
+                        <span>Kirim Bukti Pembayaran</span>
+                    </button>
+                    <button onclick="showPage('page2')" class="w-full bg-tixpen-card text-white py-[18px] rounded-2xl font-bold flex items-center justify-center gap-2.5 border border-zinc-800 hover:bg-zinc-800 transition-all active:scale-[0.98]">
+                        <i class="fas fa-search text-lg"></i>
+                        <span>Cek Status Transaksi</span>
+                    </button>
+                </div>
+                <div class="mt-12 text-center text-[10px] text-zinc-700 uppercase tracking-widest px-6 pb-6">© 2026 POTRETAKSI ENTERTAINMENT • SECURE CHECKOUT</div>
+            </div>
         </div>
+    </section>
 
-        <div class="action-bar">
-            <a href="https://www.instagram.com/potretaksi.id?igsh=NXNrNG42MHphcnJm" class="action-item">
-                <i class="fas fa-plus"></i>
-                <span>My List</span>
-            </a>
-            <a href="https://www.instagram.com/potretaksi.id?igsh=NXNrNG42MHphcnJm" class="action-item">
-                <i class="fas fa-share-nodes"></i>
-                <span>Share</span>
-            </a>
-            <a href="https://www.instagram.com/potretaksi.id?igsh=NXNrNG42MHphcnJm" class="action-item">
-                <i class="fas fa-circle-info"></i>
-                <span>Info</span>
-            </a>
+    <section id="page2" class="page-section">
+        <div class="booking-wrapper">
+            <div class="container-booking fade-in">
+                <a onclick="showPage('page1')" class="back-btn-booking"><i class="fas fa-arrow-left"></i> KEMBALI</a>
+                <h1 class="booking-title">Cek Transaksi</h1>
+                <p class="booking-subtitle">Masukkan kode booking unik yang telah Anda terima melalui email konfirmasi.</p>
+                
+                <label class="booking-label">Kode Booking Anda</label>
+                <div class="input-booking-group">
+                    <input type="text" id="bookingInput" placeholder="TIX-XXXXXX">
+                    <i class="fas fa-ticket-alt ticket-icon"></i>
+                </div>
+                <p id="error-msg">Kode booking salah, silakan cek kembali.</p>
+                
+                <button class="btn-verify" onclick="verifikasiKode()">
+                    <i class="fas fa-paper-plane"></i> Verifikasi Sekarang
+                </button>
+
+                <div class="info-box-booking">
+                    <i class="fas fa-info-circle"></i>
+                    <p>Belum menerima kode? Pastikan Anda sudah mengirimkan bukti pembayaran dan menunggu maksimal 24 jam hari kerja.</p>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <hr>
-
-        <h3 class="section-title">Synopsis</h3>
-        <p class="synopsis-text">
-            seorang siswa yang masa depannya hancur begitu saja karena judi di kelas dan tertangkap basah melalui cctv kelas
-        </p>
-
-        <h3 class="section-title">Genres</h3>
-        <div class="genre-tags">
-            <span class="tag">Psychological</span>
-            <span class="tag">Drama</span>
+    <section id="page3" class="page-section">
+        <div class="video-wrapper">
+            <div class="video-container">
+                <a onclick="showPage('page2')" class="back-button-video">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <iframe src="https://youtube.com/embed/M_Cj5IcaMvA?si=3LP4_STTxSrv9fGL" allowfullscreen></iframe>
+            </div>
+            <div class="p-5">
+                <h1 class="text-3xl font-bold mb-2">Tertipu Muslihat</h1>
+                <div class="flex items-center gap-4 text-sm mb-6">
+                    <span class="text-[#46d369] font-bold">68% Match</span>
+                    <span class="text-zinc-400">2024</span>
+                    <span class="border border-zinc-500 px-1.5 rounded text-zinc-300">17+</span>
+                    <span class="text-zinc-400">6 Minutes</span>
+                </div>
+                <div class="flex gap-10 mb-8">
+                    <div class="flex flex-col items-center gap-2"><i class="fas fa-plus text-2xl"></i><span class="text-[10px] text-zinc-400">My List</span></div>
+                    <div class="flex flex-col items-center gap-2"><i class="fas fa-share-nodes text-2xl"></i><span class="text-[10px] text-zinc-400">Share</span></div>
+                    <div class="flex flex-col items-center gap-2"><i class="fas fa-circle-info text-2xl"></i><span class="text-[10px] text-zinc-400">Info</span></div>
+                </div>
+                <hr class="border-zinc-800 mb-6">
+                <h3 class="font-bold text-lg mb-3">Synopsis</h3>
+                <p class="text-zinc-400 text-sm mb-6 leading-relaxed">seorang siswa yang masa depannya hancur begitu saja karena judi di kelas dan tertangkap basah melalui cctv kelas</p>
+                <h3 class="font-bold text-lg mb-3">Genres</h3>
+                <div class="flex gap-2">
+                    <span class="bg-zinc-800 px-4 py-1.5 rounded-full text-sm">Psychological</span>
+                    <span class="bg-zinc-800 px-4 py-1.5 rounded-full text-sm">Drama</span>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
+    <script>
+        function showPage(pageId) {
+            // Sembunyikan semua halaman
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            // Tampilkan halaman terpilih
+            const target = document.getElementById(pageId);
+            target.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function verifikasiKode() {
+            const input = document.getElementById('bookingInput').value.trim();
+            const errorMsg = document.getElementById('error-msg');
+            const daftarKodeBenar = ["TIX-T312T1PU", "TIX-MU5L1H4T", "TIX-C41V1N","TIX-P07R374K51","TIX-0R191N4L"];
+            
+            if (daftarKodeBenar.includes(input)) {
+                errorMsg.style.display = "none";
+                showPage('page3'); // Langsung ke film tanpa alert
+            } else {
+                errorMsg.style.display = "block";
+                // Animasi getar sederhana
+                errorMsg.style.transform = "translateX(5px)";
+                setTimeout(() => errorMsg.style.transform = "translateX(-5px)", 50);
+                setTimeout(() => errorMsg.style.transform = "translateX(0)", 100);
+            }
+        }
+    </script>
 </body>
 </html>

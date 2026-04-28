@@ -3,348 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POTRETAKSI - Search</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Pencarian Film</title>
     <style>
-        /* Global Styles */
-        :root {
-            --nav-dark: #121212; /* Warna abu-abu gelap sesuai permintaan */
-        }
-
         body {
-            margin: 0;
-            padding: 0;
             background-color: #000;
             color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding-bottom: 80px; /* Jarak agar konten tidak tertutup nav bawah */
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 80px; /* Ruang agar tombol tidak menutupi konten */
         }
 
-        * {
-            -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-            outline: none;
-            box-sizing: border-box;
-        }
-
-        /* Header */
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 20px;
-            background-color: #000;
-        }
-
-        .logo {
-            color: #E50914;
-            font-weight: 900;
-            font-size: 24px;
-            font-style: italic;
-            text-decoration: none;
-            letter-spacing: -1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: #ccc;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .search-icon-top {
-            color: #E50914;
-            font-size: 20px;
-        }
-
-        /* Search Bar Area */
+        /* Container Pencarian */
         .search-container {
-            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            background-color: #000;
+            padding-bottom: 20px;
+            z-index: 100;
         }
 
         .search-box {
-            background: #262626;
-            border-radius: 8px;
             display: flex;
             align-items: center;
-            padding: 12px 15px;
-        }
-
-        .search-box i {
-            color: #888;
-            margin-right: 10px;
+            background-color: #333;
+            border-radius: 8px;
+            padding: 10px 15px;
         }
 
         .search-box input {
             background: transparent;
             border: none;
-            color: #fff;
-            outline: none;
-            width: 100%;
+            color: white;
             font-size: 16px;
-        }
-
-        /* Content List */
-        .content-section {
-            padding: 20px;
-        }
-
-        .section-title {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        #movieContainer {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .movie-item {
-            display: flex;
-            align-items: center;
-            background: #121212;
-            overflow: hidden;
-            transition: background 0.3s;
-        }
-
-        .thumbnail-wrapper {
-            width: 40%;
-            aspect-ratio: 16 / 9;
-            flex-shrink: 0;
-        }
-
-        .thumbnail-wrapper img {
             width: 100%;
-            height: 100%;
+            outline: none;
+            margin-left: 10px;
+        }
+
+        /* Grid Poster Film */
+        .movie-section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .movie-card {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+        }
+
+        .movie-card img {
+            width: 100%;
+            border-radius: 4px;
+            display: block;
+            aspect-ratio: 2/3;
             object-fit: cover;
         }
 
-        .movie-info {
-            flex-grow: 1;
-            padding: 0 15px;
-            font-weight: 600;
-            font-size: 16px;
-        }
-
-        .play-btn {
-            color: #fff;
-            font-size: 32px;
-            margin-right: 15px;
-            text-decoration: none;
-        }
-
-        /* Navigasi Bawah (Style Sesuai Request) */
-        .bottom-nav {
+        /* Tombol Kembali di Pojok Kiri Bawah */
+        .back-button {
             position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: var(--nav-dark);
+            bottom: 20px;
+            left: 20px;
+            background-color: #000000; /* Merah khas Netflix */
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
             display: flex;
-            justify-content: space-around;
-            padding: 12px 0;
-            border-top: 1px solid #222;
-            z-index: 2000;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: #757575; /* Warna abu-abu untuk link tidak aktif */
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            font-size: 10px;
-            gap: 4px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+            z-index: 1000;
+            text-decoration: none;
+            font-size: 14px;
         }
 
-        .nav-link.active { 
-            color: white; /* Hanya Search yang putih di halaman ini */
+        .back-button:active {
+            transform: scale(0.95);
         }
 
-        .nav-link i { 
-            font-size: 20px; 
+        .back-button svg {
+            margin-right: 8px;
         }
 
-        /* Not Found Message */
-        #notFound {
+        .hidden {
             display: none;
-            text-align: center;
-            padding: 50px 20px;
-            color: #555;
         }
+        
+      * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    outline: none;
+}
     </style>
 </head>
 <body>
 
-    <header>
-        <a href="index.html" class="logo">POTRETAKSI</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <i class="fa-solid fa-magnifying-glass search-icon-top"></i>
-        </div>
-    </header>
+    <a href="javascript:history.back()" class="back-button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Kembali
+    </a>
 
     <div class="search-container">
         <div class="search-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="Search for a movie, genre...">
+            <svg width="20" height="20" fill="#8c8c8c" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <input type="text" id="searchInput" placeholder="Cari film..." onkeyup="liveSearch()">
         </div>
     </div>
 
-    <section class="content-section">
-        <h2 class="section-title">Top Searches</h2>
+    <div class="movie-section-title">Top Search</div>
 
-        <div id="movieContainer">
-            <div class="movie-item">
-                <div class="thumbnail-wrapper">
-                    <img src="siccinthumbnail.jpg" alt="Siccin">
-                </div>
-                <div class="movie-info">Siccin</div>
-                <a href="siccinfilm.html" class="play-btn">
-                    <i class="fa-regular fa-circle-play"></i>
-                </a>
-            </div>
-
-            <div class="movie-item">
-                <div class="thumbnail-wrapper">
-                    <img src="snthumbnail.jpg" alt="School Nightmare">
-                </div>
-                <div class="movie-info">School Nightmare</div>
-                <a href="schoolnightmarefilm.html" class="play-btn">
-                    <i class="fa-regular fa-circle-play"></i>
-                </a>
-            </div>
-
-            <div class="movie-item">
-                <div class="thumbnail-wrapper">
-                    <img src="ningrumthumbnail.png" alt="Kembalinya Ningrum">
-                </div>
-                <div class="movie-info">Kembalinya Ningrum</div>
-                <a href="ningrumfilm.html" class="play-btn">
-                    <i class="fa-regular fa-circle-play"></i>
-                </a>
-            </div>
-
-            <div class="movie-item">
-                <div class="thumbnail-wrapper">
-                    <img src="merasukthumbnail.png" alt="Merasuk: First Possession">
-                </div>
-                <div class="movie-info">Merasuk: First Possession</div>
-                <a href="merasukfilm.html" class="play-btn">
-                    <i class="fa-regular fa-circle-play"></i>
-                </a>
-            </div>
-
-            <div class="movie-item">
-                <div class="thumbnail-wrapper">
-                    <img src="pertanyaanthumbnail.jpg" alt="Pertanyaan Dalam Kubur">
-                </div>
-                <div class="movie-info">Pertanyaan Dalam Kubur</div>
-                <a href="pertanyaan.html" class="play-btn">
-                    <i class="fa-regular fa-circle-play"></i>
-                </a>
-            </div>
-
-            <div class="movie-item">
-                <div class="thumbnail-wrapper">
-                    <img src="gagabahthumbnail.jpg" alt="Gagabah: Ucap Laku Lampah">
-                </div>
-                <div class="movie-info">Gagabah: Ucap Laku Lampah</div>
-                <a href="gagabahfilm.html" class="play-btn">
-                    <i class="fa-regular fa-circle-play"></i>
-                </a>
-            </div>
-            
-                <div class="movie-item">
-                <div class="thumbnail-wrapper">
-                    <img src="tertipumuslihatthumbnail.jpg" alt="Tertipu Muslihat">
-                </div>
-                <div class="movie-info">Tertipu Muslihat</div>
-                <a href="tertipumuslihatfilm.html" class="play-btn">
-                    <i class="fa-regular fa-circle-play"></i>
-                </a>
-            </div>
-           <div class="movie-item">
-                <div class="thumbnail-wrapper">
-                    <img src="searchingthumbnail.jpg" alt="Searching: First Case">
-                </div>
-                <div class="movie-info">Searching: First Case</div>
-                <a href="searchingepisode1.html" class="play-btn">
-                    <i class="fa-regular fa-circle-play"></i>
-                </a>
-            </div>
-            
-            <div class="movie-item">
-                <div class="thumbnail-wrapper">
-                    <img src="pdkthumbnail.jpg" alt="Penunggu Dari Kematian">
-                </div>
-                <div class="movie-info">Penunggu Dari Kematian</div>
-                <a href="leuweungfilm.html" class="play-btn">
-                    <i class="fa-regular fa-circle-play"></i>
-                </a>
-            </div>
-            
-            <div class="movie-item">
-                <div class="thumbnail-wrapper">
-                    <img src="diakuthumbnail.jpg" alt="Dia Terpanggil">
-                </div>
-                <div class="movie-info">Dia Terpanggil</div>
-                <a href="diaterpanggilfull.html" class="play-btn">
-                    <i class="fa-regular fa-circle-play"></i>
-                </a>
-            </div>
+    <div class="movie-grid" id="movieGrid">
+        <div class="movie-card" data-title="Merasuk: first possession" onclick="location.href='merasukfilm.html'">
+            <img src="merasukku.jpg" alt="Merasuk: first possession">
         </div>
-
-        <div id="notFound">
-            <i class="fas fa-search-minus" style="font-size: 40px; margin-bottom: 10px;"></i>
-            <p>Film tidak ditemukan</p>
+        <div class="movie-card" data-title="Pertanyaan dalam kubur" onclick="location.href='pertanyaan.html'">
+            <img src="pertanyaaku.jpg" alt="Pertanyaan dalam kubur">
         </div>
-    </section>
-
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-link">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="Searchpage.html" class="nav-link active">
-            <i class="fas fa-search"></i>
-            <span>Search</span>
-        </a>
-    </nav>
+        <div class="movie-card" data-title="Gagabah: ucap laku lampah" onclick="location.href='gagabahfilm.html'">
+            <img src="gagabahku.jpg" alt="Gagabah: ucap laku lampah">
+        </div>
+        <div class="movie-card" data-title="Kembalinya ningrum" onclick="location.href='ningrumfilm.html'">
+            <img src="ningcomku.jpg" alt="Kembalinya ningrum">
+        </div>
+        <div class="movie-card" data-title="Searching: first case" onclick="location.href='teotfw.html'">
+            <img src="searchingku.jpg" alt="Searching: first case">
+        </div>
+        <div class="movie-card" data-title="Dia terpanggil" onclick="location.href='diaterpanggilfull.html'">
+            <img src="diaku.jpg" alt="Dia terpanggil">
+        </div>
+        <div class="movie-card" data-title="Penunggu dari kematian" onclick="location.href='leuweungfilm.html'">
+            <img src="penungguku.jpg" alt="Penunggu dari kematian">
+        </div>
+        <div class="movie-card" data-title="Siccin" onclick="location.href='siccinfilm.html'">
+            <img src="siccinposter.jpg" alt="Siccin">
+        </div>
+        <div class="movie-card" data-title="School nightmare" onclick="location.href='schoolnightmarefull.html'">
+            <img src="schoolnightmareps.jpg" alt="School nightmare">
+        </div>
+        <div class="movie-card" data-title="Virus x" onclick="location.href='virusxfull.html'">
+            <img src="virusxposter.jpg" alt="Virus x">
+        </div>
+    </div>
 
     <script>
-        // Logika Pencarian Real-time
-        const searchInput = document.getElementById('searchInput');
-        const movieContainer = document.getElementById('movieContainer');
-        const movieItems = movieContainer.getElementsByClassName('movie-item');
-        const notFound = document.getElementById('notFound');
+        function liveSearch() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('movie-card');
 
-        searchInput.addEventListener('input', function() {
-            const query = searchInput.value.toLowerCase();
-            let hasResults = false;
-
-            for (let i = 0; i < movieItems.length; i++) {
-                const title = movieItems[i].querySelector('.movie-info').textContent.toLowerCase();
-                
-                if (title.includes(query)) {
-                    movieItems[i].style.display = 'flex';
-                    hasResults = true;
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getAttribute('data-title').toLowerCase();
+                if (title.includes(input)) {
+                    cards[i].classList.remove("hidden");
                 } else {
-                    movieItems[i].style.display = 'none';
+                    cards[i].classList.add("hidden");
                 }
             }
-
-            // Tampilkan pesan jika tidak ada film yang cocok
-            notFound.style.display = hasResults ? 'none' : 'block';
-        });
+        }
     </script>
-
 </body>
 </html>
